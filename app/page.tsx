@@ -35,6 +35,7 @@ export default function CryptEDWebsite() {
         splineApp.camera.enabled = false
         splineApp.camera.autoRotate = false
         splineApp.camera.autoRotateSpeed = 0
+        splineApp.camera.controls = null
       }
       
       // Disable any object animations
@@ -54,6 +55,33 @@ export default function CryptEDWebsite() {
       if (splineApp.camera) {
         splineApp.camera.position.set(0, 0, 5)
         splineApp.camera.lookAt(0, 0, 0)
+      }
+      
+      // Disable all touch and mouse interactions
+      if (splineApp.renderer) {
+        splineApp.renderer.domElement.style.pointerEvents = 'none'
+        splineApp.renderer.domElement.style.touchAction = 'none'
+      }
+      
+      // Disable orbit controls if they exist
+      if (splineApp.controls) {
+        splineApp.controls.enabled = false
+        splineApp.controls.enableRotate = false
+        splineApp.controls.enableZoom = false
+        splineApp.controls.enablePan = false
+        splineApp.controls.enableDamping = false
+        splineApp.controls.autoRotate = false
+      }
+      
+      // Disable any event listeners
+      if (splineApp.renderer && splineApp.renderer.domElement) {
+        splineApp.renderer.domElement.removeEventListener('touchstart', () => {})
+        splineApp.renderer.domElement.removeEventListener('touchmove', () => {})
+        splineApp.renderer.domElement.removeEventListener('touchend', () => {})
+        splineApp.renderer.domElement.removeEventListener('mousedown', () => {})
+        splineApp.renderer.domElement.removeEventListener('mousemove', () => {})
+        splineApp.renderer.domElement.removeEventListener('mouseup', () => {})
+        splineApp.renderer.domElement.removeEventListener('wheel', () => {})
       }
     }
   }
@@ -86,10 +114,21 @@ export default function CryptEDWebsite() {
 
       {/* Spline 3D Hero Section with Overlay */}
       <section className="pt-20 min-h-screen relative">
-        <div className="w-full h-screen">
+        <div className={`w-full h-screen ${isMobile ? 'pointer-events-none touch-none select-none' : ''}`}>
           <Spline
             scene="https://prod.spline.design/SDHjPMF7pkQD9ilj/scene.splinecode"
-            style={{ width: '100%', height: '100%' }}
+            style={{ 
+              width: '100%', 
+              height: '100%',
+              ...(isMobile && {
+                pointerEvents: 'none',
+                touchAction: 'none',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none'
+              })
+            }}
             onLoad={handleSplineLoad}
           />
         </div>
