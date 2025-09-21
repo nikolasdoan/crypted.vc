@@ -1,11 +1,43 @@
 "use client"
 
+import { useEffect, useState } from 'react'
 import Header from "@/components/header"
 import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
 import Spline from '@splinetool/react-spline'
 
 export default function CryptEDWebsite() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const handleSplineLoad = (splineApp: any) => {
+    if (isMobile && splineApp) {
+      // Disable camera controls and animations on mobile
+      splineApp.setVariable('mobile', true)
+      
+      // Pause any animations
+      if (splineApp.animations) {
+        splineApp.animations.forEach((animation: any) => {
+          animation.pause()
+        })
+      }
+      
+      // Disable camera controls
+      if (splineApp.camera) {
+        splineApp.camera.enabled = false
+      }
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black">
@@ -39,6 +71,7 @@ export default function CryptEDWebsite() {
           <Spline
             scene="https://prod.spline.design/SDHjPMF7pkQD9ilj/scene.splinecode"
             style={{ width: '100%', height: '100%' }}
+            onLoad={handleSplineLoad}
           />
         </div>
         
