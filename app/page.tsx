@@ -22,19 +22,38 @@ export default function CryptEDWebsite() {
 
   const handleSplineLoad = (splineApp: any) => {
     if (isMobile && splineApp) {
-      // Disable camera controls and animations on mobile
-      splineApp.setVariable('mobile', true)
-      
-      // Pause any animations
+      // Disable all animations
       if (splineApp.animations) {
         splineApp.animations.forEach((animation: any) => {
           animation.pause()
+          animation.timeScale = 0
         })
       }
       
-      // Disable camera controls
+      // Disable camera controls and movement
       if (splineApp.camera) {
         splineApp.camera.enabled = false
+        splineApp.camera.autoRotate = false
+        splineApp.camera.autoRotateSpeed = 0
+      }
+      
+      // Disable any object animations
+      splineApp.scene.traverse((child: any) => {
+        if (child.animations) {
+          child.animations.forEach((animation: any) => {
+            animation.pause()
+            animation.timeScale = 0
+          })
+        }
+        if (child.rotation) {
+          child.rotation.autoRotate = false
+        }
+      })
+      
+      // Set a static camera position
+      if (splineApp.camera) {
+        splineApp.camera.position.set(0, 0, 5)
+        splineApp.camera.lookAt(0, 0, 0)
       }
     }
   }
