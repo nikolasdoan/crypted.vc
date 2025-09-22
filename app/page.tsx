@@ -49,15 +49,10 @@ export default function CryptEDWebsite() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={32} height={32} className="w-8 h-8" />
+              <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={40} height={40} className="w-10 h-10 shrink-0" />
               <div className="text-2xl font-bold text-white">CryptED</div>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="text-white p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
               <button className="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium">
                 Try it now
               </button>
@@ -94,9 +89,6 @@ export default function CryptEDWebsite() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-6">Meet Our Team</h2>
-            <p className="text-xl text-gray-300">
-              Experts in crypto, AI, and education
-            </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-12">
@@ -122,24 +114,6 @@ export default function CryptEDWebsite() {
             <div className="text-center">
               <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
                 <Image
-                  src="/avatars/nikolas_avatar.jpeg"
-                  alt="Nikolas Doan avatar"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Nikolas Doan</h3>
-              <p className="text-gray-300 font-medium mb-4">COO</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                MSc Robotics candidate at NTU ('26), AI and robotics researcher, 
-                and former member of Google Cloud Startups.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
-                <Image
                   src="/avatars/brian_avatar.png"
                   alt="Brian Nguyen avatar"
                   width={160}
@@ -150,8 +124,24 @@ export default function CryptEDWebsite() {
               <h3 className="text-xl font-semibold text-white mb-2">Brian Nguyen</h3>
               <p className="text-gray-300 font-medium mb-4">CTO</p>
               <p className="text-gray-400 text-sm leading-relaxed">
-                MS Electrical Engineering candidate at NTUST ('27). Developer of three published apps 
-                on the App Store and specialist in gamification and learning mechanics.
+                MSc. EECS at NTUST ('27). AI Engineer, Mobile App Developer, specialist in gamification and learning.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
+                <Image
+                  src="/avatars/nikolas_avatar.jpeg"
+                  alt="Nikolas Doan avatar"
+                  width={160}
+                  height={160}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Nikolas Doan</h3>
+              <p className="text-gray-300 font-medium mb-4">COO</p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                MSc Candidate AI/Robotics at NTU ('26), Former Google Cloud Startups Silicon Valley, CEO TECXMATE.COM
               </p>
             </div>
           </div>
@@ -165,11 +155,11 @@ export default function CryptEDWebsite() {
           <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={36} height={36} className="w-9 h-9" />
+                <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
                 <div className="text-2xl font-bold text-white">CryptED</div>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
-                The future of crypto education. Learn, earn, and master blockchain technology through gamified learning.
+                Learn, earn, and master blockchain through gamified learning.
               </p>
               <div className="flex space-x-4">
                 <a href="https://www.linkedin.com/company/crypted-vc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
