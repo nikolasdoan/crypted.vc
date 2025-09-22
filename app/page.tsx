@@ -52,18 +52,21 @@ export default function CryptEDWebsite() {
       name: "Paolo Joseph Lising",
       designation: "CEO",
       src: "/avatars/paolo_ava.png",
+      email: "paolo@crypted.vc",
     },
     {
       quote: "AI engineer and app builder specializing in gamification and learning experiences.",
       name: "Brian Nguyen",
       designation: "CTO",
       src: "/avatars/brian_avatar.png",
+      email: "brian@crypted.vc",
     },
     {
       quote: "AI/Robotics leader, ex-Google Cloud Startups, and founder of TECXMATE.COM.",
       name: "Nikolas Doan",
       designation: "COO",
       src: "/avatars/nikolas_avatar.jpeg",
+      email: "niko@crypted.vc",
     },
   ]
 
@@ -158,7 +161,7 @@ export default function CryptEDWebsite() {
                 <div className="text-2xl font-bold text-white">Crypted Ventures</div>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
-                Learn, earn, and master blockchain through gamified learning.
+                Learn, earn, and master blockchain with CryptED.
               </p>
               <div className="flex space-x-4">
                 <a href="https://www.linkedin.com/company/crypted-vc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
@@ -198,7 +201,6 @@ export default function CryptEDWebsite() {
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h3>
               <ul className="space-y-3">
-                <li><a href="mailto:support@crypted.vc" className="text-gray-400 hover:text-white transition-colors">support@crypted.vc</a></li>
                 <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
                 <li><a href="mailto:brian@crypted.vc" className="text-gray-400 hover:text-white transition-colors">brian@crypted.vc</a></li>
                 <li><a href="mailto:niko@crypted.vc" className="text-gray-400 hover:text-white transition-colors">niko@crypted.vc</a></li>

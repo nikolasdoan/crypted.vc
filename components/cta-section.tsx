@@ -33,11 +33,11 @@ export default function CTASection() {
           <div className="pt-8">
             <p className="text-gray-400 mb-4">Contact us</p>
             <a
-              href="mailto:hello@crypted.vc"
+              href="mailto:support@crypted.vc"
               className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
             >
               <Mail className="h-5 w-5" />
-              hello@crypted.vc
+              support@crypted.vc
             </a>
           </div>
         </div>

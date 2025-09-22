@@ -11,6 +11,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string;
+  email?: string;
 };
 
 export const AnimatedTestimonials = ({
@@ -51,7 +52,7 @@ export const AnimatedTestimonials = ({
     <div className={cn("max-w-sm md:max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-20", className)}>
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
         <div>
-          <div className="relative h-80 w-full">
+          <div className="relative h-80 w-full group">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -92,6 +93,14 @@ export const AnimatedTestimonials = ({
                     draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center"
                   />
+                  {/* Email overlay on hover */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <div className="mx-2 mb-2 rounded-2xl bg-gradient-to-t from-black/70 to-black/20 px-3 py-2">
+                      <p className="text-xs md:text-sm text-white/90 truncate text-center">
+                        {testimonial.email}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
