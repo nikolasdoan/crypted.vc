@@ -8,6 +8,7 @@ import ShaderBackground from "@/components/shader-background"
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
 import { LampDemo } from "@/components/ui/lamp"
 import Image from 'next/image'
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials"
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
@@ -44,6 +45,27 @@ export default function CryptEDWebsite() {
   const handleRiveInteraction = () => {
     setRiveInteracted(!riveInteracted)
   }
+
+  const testimonials = [
+    {
+      quote: "Tokenization researcher and author focused on digital inclusion and real-world crypto impact.",
+      name: "Paolo Joseph Lising",
+      designation: "CEO",
+      src: "/avatars/paolo_ava.png",
+    },
+    {
+      quote: "AI engineer and app builder specializing in gamification and learning experiences.",
+      name: "Brian Nguyen",
+      designation: "CTO",
+      src: "/avatars/brian_avatar.png",
+    },
+    {
+      quote: "AI/Robotics leader, ex-Google Cloud Startups, and founder of TECXMATE.COM.",
+      name: "Nikolas Doan",
+      designation: "COO",
+      src: "/avatars/nikolas_avatar.jpeg",
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-black">
@@ -113,64 +135,10 @@ export default function CryptEDWebsite() {
       {/* Team Section */}
       <section id="team" className="relative py-20 min-h-[70vh] bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">Meet Our Team</h2>
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold text-white">Meet Our Team</h2>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
-                <Image
-                  src="/avatars/paolo_ava.png"
-                  alt="Paolo Joseph Lising avatar"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Paolo Joseph Lising</h3>
-              <p className="text-gray-300 font-medium mb-4">CEO</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Tokenization researcher (Harvard ALM '27) with four years of crypto industry experience. 
-                Author and thought leader on digital inclusion.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
-                <Image
-                  src="/avatars/brian_avatar.png"
-                  alt="Brian Nguyen avatar"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Brian Nguyen</h3>
-              <p className="text-gray-300 font-medium mb-4">CTO</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                MSc. EECS at NTUST ('27). AI Engineer, Mobile App Developer, specialist in gamification and learning.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
-                <Image
-                  src="/avatars/nikolas_avatar.jpeg"
-                  alt="Nikolas Doan avatar"
-                  width={160}
-                  height={160}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Nikolas Doan</h3>
-              <p className="text-gray-300 font-medium mb-4">COO</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                MSc Candidate AI/Robotics at NTU ('26), Former Google Cloud Startups Silicon Valley, CEO TECXMATE.COM
-              </p>
-            </div>
-          </div>
+          <AnimatedTestimonials testimonials={testimonials} autoplay className="py-0" />
         </div>
         {/* Subtle bottom glow */}
         <div
