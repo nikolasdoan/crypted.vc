@@ -136,6 +136,16 @@
     @apply bg-background text-foreground;
     font-family: var(--font-figtree), system-ui, -apple-system, sans-serif;
   }
+  
+  /* Ensure all text elements use Figtree font consistently */
+  * {
+    font-family: var(--font-figtree), system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Remove text shadows for clean appearance */
+  * {
+    text-shadow: none !important;
+  }
 }
 
 .instrument {

@@ -6,14 +6,16 @@ import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
 // Removed Spline in favor of Rive hero
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
+import { LampDemo } from "@/components/ui/lamp"
 import Image from 'next/image'
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
+  const [riveInteracted, setRiveInteracted] = useState(false)
 
-  // Rive: wizcat overlay on hero
+  // Rive: black cat overlay on hero
   const { RiveComponent, rive } = useRive({
-    src: '/wizcat.riv',
+    src: '/black_cat.riv',
     autoplay: true,
     stateMachines: ['BLACK CATW'],
     layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center })
@@ -37,6 +39,13 @@ export default function CryptEDWebsite() {
     if (!rive) return
     rive.play()
   }, [rive])
+
+  // Handle first interaction with Rive animation
+  const handleRiveInteraction = () => {
+    if (!riveInteracted) {
+      setRiveInteracted(true)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-black">
@@ -62,28 +71,44 @@ export default function CryptEDWebsite() {
         </div>
       </header>
 
-      {/* Rive Hero Section (replacing Spline) */}
-      <section className="pt-20 min-h-screen relative bg-[#5b10fd]">
-        <div className="w-full h-screen">
+      {/* Rive Hero Section with Lamp Overlay */}
+      <section 
+        className="pt-20 min-h-screen relative bg-black overflow-hidden"
+        onClick={handleRiveInteraction}
+        onTouchStart={handleRiveInteraction}
+      >
+        {/* Rive Animation - Ultra smooth transition to front */}
+        <div 
+          className={`w-full h-screen absolute inset-0 transition-all duration-1000 ease-in-out ${
+            riveInteracted 
+              ? 'z-30 opacity-100 scale-100 translate-y-0' 
+              : 'z-0 opacity-60 scale-95 translate-y-4'
+          }`}
+        >
           {RiveComponent && (
             <RiveComponent 
               style={{ 
                 width: '100%', 
                 height: '100%',
                 touchAction: 'pan-y',
-                pointerEvents: 'auto'
+                pointerEvents: riveInteracted ? 'auto' : 'none'
               }} 
             />
           )}
         </div>
         
-        {/* Upper Top Headline */}
-        <div className="absolute top-32 left-4 right-4 text-center">
-          <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight max-w-4xl mx-auto">
-            Game Your Way to Token Literacy
-          </h1>
+        {/* Lamp Component - Ultra smooth transition to back */}
+        <div 
+          className={`relative transition-all duration-1000 ease-in-out w-full h-auto ${
+            riveInteracted 
+              ? 'z-10 opacity-30 scale-90 translate-y-8 blur-sm' 
+              : 'z-20 opacity-100 scale-100 translate-y-0 blur-0'
+          }`}
+        >
+          <div className="h-[60vh] flex items-center justify-center">
+            <LampDemo />
+          </div>
         </div>
-
       </section>
 
 
@@ -159,7 +184,7 @@ export default function CryptEDWebsite() {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
                 <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
-                <div className="text-2xl font-bold text-white">CryptED</div>
+                <div className="text-2xl font-bold text-white">Crypted Ventures</div>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
                 Learn, earn, and master blockchain through gamified learning.
@@ -202,8 +227,9 @@ export default function CryptEDWebsite() {
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h3>
               <ul className="space-y-3">
-                <li><a href="mailto:brian@crypted.vc" className="text-gray-400 hover:text-white transition-colors">brian@crypted.vc</a></li>
+                <li><a href="mailto:support@crypted.vc" className="text-gray-400 hover:text-white transition-colors">support@crypted.vc</a></li>
                 <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
+                <li><a href="mailto:brian@crypted.vc" className="text-gray-400 hover:text-white transition-colors">brian@crypted.vc</a></li>
                 <li><a href="mailto:niko@crypted.vc" className="text-gray-400 hover:text-white transition-colors">niko@crypted.vc</a></li>
                 <li><a href="mailto:paolo@crypted.vc" className="text-gray-400 hover:text-white transition-colors">paolo@crypted.vc</a></li>
               </ul>
@@ -212,7 +238,7 @@ export default function CryptEDWebsite() {
           
           <div className="mt-12 pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-500 text-sm">© 2024 CryptED. All rights reserved.</p>
+              <p className="text-gray-500 text-sm">© 2024 Crypted Ventures. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Privacy Policy</a>
                 <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Terms of Service</a>

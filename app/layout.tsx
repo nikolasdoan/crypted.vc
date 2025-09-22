@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${figtree.variable} ${instrumentSerif.variable}`}>
-      <body>{children}</body>
+      <body className="font-figtree">{children}</body>
     </html>
   )
 }
