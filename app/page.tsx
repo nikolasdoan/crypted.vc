@@ -66,7 +66,14 @@ export default function CryptEDWebsite() {
       <section className="pt-20 min-h-screen relative bg-[#5b10fd]">
         <div className="w-full h-screen">
           {RiveComponent && (
-            <RiveComponent style={{ width: '100%', height: '100%' }} />
+            <RiveComponent 
+              style={{ 
+                width: '100%', 
+                height: '100%',
+                touchAction: 'pan-y',
+                pointerEvents: 'auto'
+              }} 
+            />
           )}
         </div>
         
