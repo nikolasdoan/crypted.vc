@@ -32,15 +32,11 @@ export default function CryptEDWebsite() {
 
   // Spline removed
 
-  // Pause Rive animation on mobile; resume on desktop
+  // Rive animation now plays on both mobile and desktop
   useEffect(() => {
     if (!rive) return
-    if (isMobile) {
-      rive.pause()
-    } else {
-      rive.play()
-    }
-  }, [isMobile, rive])
+    rive.play()
+  }, [rive])
 
   return (
     <div className="min-h-screen bg-black">
@@ -49,7 +45,7 @@ export default function CryptEDWebsite() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={40} height={40} className="w-10 h-10 shrink-0" />
+              <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={40} height={40} className="w-10 h-10 shrink-0" />
               <div className="text-2xl font-bold text-white">CryptED</div>
             </div>
             <div className="flex items-center space-x-4">
@@ -68,7 +64,7 @@ export default function CryptEDWebsite() {
 
       {/* Rive Hero Section (replacing Spline) */}
       <section className="pt-20 min-h-screen relative bg-[#5b10fd]">
-        <div className={`w-full h-screen ${isMobile ? 'pointer-events-none touch-none select-none' : ''}`}>
+        <div className="w-full h-screen">
           {RiveComponent && (
             <RiveComponent style={{ width: '100%', height: '100%' }} />
           )}
@@ -155,7 +151,7 @@ export default function CryptEDWebsite() {
           <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
+                <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
                 <div className="text-2xl font-bold text-white">CryptED</div>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">

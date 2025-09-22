@@ -21,9 +21,14 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "v0 App",
+  title: "Crypted Ventures",
   description: "Created with v0",
   generator: "v0.app",
+  icons: {
+    icon: '/crypted-logo-black-cropped.svg',
+    shortcut: '/crypted-logo-black-cropped.svg',
+    apple: '/crypted-logo-black-cropped.svg',
+  },
 }
 
 export default function RootLayout({
