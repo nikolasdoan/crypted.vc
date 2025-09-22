@@ -93,9 +93,9 @@ export const AnimatedTestimonials = ({
                     draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center"
                   />
-                  {/* Email overlay on hover */}
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    <div className="mx-2 mb-2 rounded-2xl bg-gradient-to-t from-black/70 to-black/20 px-3 py-2">
+                  {/* Email overlay on hover (full-width along bottom) */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-full rounded-b-3xl bg-gradient-to-t from-black/70 to-transparent px-3 py-2">
                       <p className="text-xs md:text-sm text-white/90 truncate text-center">
                         {testimonial.email}
                       </p>
@@ -161,13 +161,13 @@ export const AnimatedTestimonials = ({
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="h-7 w-7 rounded-full bg-secondary flex items-center justify-center group/button"
+              className="p-0 flex items-center justify-center group/button"
             >
               <IconArrowLeft className="h-5 w-5 text-foreground group-hover/button:rotate-12 transition-transform duration-300" />
             </button>
             <button
               onClick={handleNext}
-              className="h-7 w-7 rounded-full bg-secondary flex items-center justify-center group/button"
+              className="p-0 flex items-center justify-center group/button"
             >
               <IconArrowRight className="h-5 w-5 text-foreground group-hover/button:-rotate-12 transition-transform duration-300" />
             </button>

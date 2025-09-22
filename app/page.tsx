@@ -48,21 +48,21 @@ export default function CryptEDWebsite() {
 
   const testimonials = [
     {
-      quote: "Tokenization researcher and author focused on digital inclusion and real-world crypto impact.",
+      quote: "Blockchain Researcher at Harvard University. Author on token economy business and policy.",
       name: "Paolo Joseph Lising",
       designation: "CEO",
       src: "/avatars/paolo_ava.png",
       email: "paolo@crypted.vc",
     },
     {
-      quote: "AI engineer and app builder specializing in gamification and learning experiences.",
+      quote: "EE & AI Engineer, App Developer",
       name: "Brian Nguyen",
       designation: "CTO",
       src: "/avatars/brian_avatar.png",
       email: "brian@crypted.vc",
     },
     {
-      quote: "AI/Robotics leader, ex-Google Cloud Startups, and founder of TECXMATE.COM.",
+      quote: "Product Designer",
       name: "Nikolas Doan",
       designation: "COO",
       src: "/avatars/nikolas_avatar.jpeg",
@@ -73,7 +73,7 @@ export default function CryptEDWebsite() {
   return (
     <div className="min-h-screen bg-black">
       {/* OKX-style Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-[2000] backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -182,9 +182,9 @@ export default function CryptEDWebsite() {
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">API</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Crypted Game</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Venture Capital</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">More</a></li>
               </ul>
             </div>
             
@@ -192,7 +192,6 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h3>
               <ul className="space-y-3">
                 <li><a href="#team" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
               </ul>
@@ -202,9 +201,6 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h3>
               <ul className="space-y-3">
                 <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
-                <li><a href="mailto:brian@crypted.vc" className="text-gray-400 hover:text-white transition-colors">brian@crypted.vc</a></li>
-                <li><a href="mailto:niko@crypted.vc" className="text-gray-400 hover:text-white transition-colors">niko@crypted.vc</a></li>
-                <li><a href="mailto:paolo@crypted.vc" className="text-gray-400 hover:text-white transition-colors">paolo@crypted.vc</a></li>
               </ul>
             </div>
           </div>
