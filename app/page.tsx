@@ -89,7 +89,7 @@ export default function CryptEDWebsite() {
                 width: '100%', 
                 height: '100%',
                 touchAction: 'pan-y',
-                pointerEvents: riveInteracted ? 'auto' : 'none'
+                pointerEvents: isMobile ? 'none' : (riveInteracted ? 'auto' : 'none')
               }} 
             />
           )}
