@@ -40,17 +40,15 @@ export default function CryptEDWebsite() {
     rive.play()
   }, [rive])
 
-  // Handle first interaction with Rive animation
+  // Toggle between Rive animation and lamp/text
   const handleRiveInteraction = () => {
-    if (!riveInteracted) {
-      setRiveInteracted(true)
-    }
+    setRiveInteracted(!riveInteracted)
   }
 
   return (
     <div className="min-h-screen bg-black">
       {/* OKX-style Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -73,7 +71,7 @@ export default function CryptEDWebsite() {
 
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
-        className="pt-20 min-h-screen relative bg-black overflow-hidden"
+        className="pt-0 min-h-screen relative bg-black overflow-hidden"
         onClick={handleRiveInteraction}
         onTouchStart={handleRiveInteraction}
       >
@@ -81,7 +79,7 @@ export default function CryptEDWebsite() {
         <div 
           className={`w-full h-screen absolute inset-0 transition-all duration-1000 ease-in-out ${
             riveInteracted 
-              ? 'z-30 opacity-100 scale-100 translate-y-0' 
+              ? 'z-60 opacity-100 scale-100 translate-y-0' 
               : 'z-0 opacity-60 scale-95 translate-y-4'
           }`}
         >
@@ -97,12 +95,12 @@ export default function CryptEDWebsite() {
           )}
         </div>
         
-        {/* Lamp Component - Ultra smooth transition to back */}
+        {/* Lamp Component - Fixed relative to hero section */}
         <div 
-          className={`relative transition-all duration-1000 ease-in-out w-full h-auto ${
+          className={`absolute top-0 left-0 right-0 transition-all duration-1000 ease-in-out w-full h-auto ${
             riveInteracted 
-              ? 'z-10 opacity-30 scale-90 translate-y-8 blur-sm' 
-              : 'z-20 opacity-100 scale-100 translate-y-0 blur-0'
+              ? 'z-40 opacity-30 scale-90 translate-y-0 blur-md' 
+              : 'z-40 opacity-100 scale-100 translate-y-0 blur-0'
           }`}
         >
           <div className="h-[60vh] flex items-center justify-center">
@@ -113,7 +111,7 @@ export default function CryptEDWebsite() {
 
 
       {/* Team Section */}
-      <section id="team" className="py-20 bg-gray-900">
+      <section id="team" className="relative py-20 min-h-[70vh] bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-6">Meet Our Team</h2>
@@ -174,6 +172,11 @@ export default function CryptEDWebsite() {
             </div>
           </div>
         </div>
+        {/* Subtle bottom glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32 bg-gradient-to-t from-\[#5b10fd\]/50 to-transparent blur-2xl"
+        />
       </section>
 
 

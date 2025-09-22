@@ -45,7 +45,7 @@ export default function CTASection() {
 
       <footer className="mt-20 pt-8 border-t border-white/10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-white font-bold text-xl">CryptED</div>
+          <div className="text-white font-bold text-xl">Crypted</div>
           <div className="flex gap-6">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
               Privacy
