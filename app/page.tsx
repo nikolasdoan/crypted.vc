@@ -4,10 +4,19 @@ import { useEffect, useState } from 'react'
 import Header from "@/components/header"
 import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
-import Spline from '@splinetool/react-spline'
+// Removed Spline in favor of Rive hero
+import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
+
+  // Rive: wizcat overlay on hero
+  const { RiveComponent, rive } = useRive({
+    src: '/wizcat.riv',
+    autoplay: true,
+    stateMachines: ['BLACK CATW'],
+    layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center })
+  })
 
   useEffect(() => {
     const checkMobile = () => {
@@ -20,71 +29,17 @@ export default function CryptEDWebsite() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const handleSplineLoad = (splineApp: any) => {
-    if (isMobile && splineApp) {
-      // Disable all animations
-      if (splineApp.animations) {
-        splineApp.animations.forEach((animation: any) => {
-          animation.pause()
-          animation.timeScale = 0
-        })
-      }
-      
-      // Disable camera controls and movement
-      if (splineApp.camera) {
-        splineApp.camera.enabled = false
-        splineApp.camera.autoRotate = false
-        splineApp.camera.autoRotateSpeed = 0
-        splineApp.camera.controls = null
-      }
-      
-      // Disable any object animations
-      splineApp.scene.traverse((child: any) => {
-        if (child.animations) {
-          child.animations.forEach((animation: any) => {
-            animation.pause()
-            animation.timeScale = 0
-          })
-        }
-        if (child.rotation) {
-          child.rotation.autoRotate = false
-        }
-      })
-      
-      // Set a static camera position
-      if (splineApp.camera) {
-        splineApp.camera.position.set(0, 0, 5)
-        splineApp.camera.lookAt(0, 0, 0)
-      }
-      
-      // Disable all touch and mouse interactions
-      if (splineApp.renderer) {
-        splineApp.renderer.domElement.style.pointerEvents = 'none'
-        splineApp.renderer.domElement.style.touchAction = 'none'
-      }
-      
-      // Disable orbit controls if they exist
-      if (splineApp.controls) {
-        splineApp.controls.enabled = false
-        splineApp.controls.enableRotate = false
-        splineApp.controls.enableZoom = false
-        splineApp.controls.enablePan = false
-        splineApp.controls.enableDamping = false
-        splineApp.controls.autoRotate = false
-      }
-      
-      // Disable any event listeners
-      if (splineApp.renderer && splineApp.renderer.domElement) {
-        splineApp.renderer.domElement.removeEventListener('touchstart', () => {})
-        splineApp.renderer.domElement.removeEventListener('touchmove', () => {})
-        splineApp.renderer.domElement.removeEventListener('touchend', () => {})
-        splineApp.renderer.domElement.removeEventListener('mousedown', () => {})
-        splineApp.renderer.domElement.removeEventListener('mousemove', () => {})
-        splineApp.renderer.domElement.removeEventListener('mouseup', () => {})
-        splineApp.renderer.domElement.removeEventListener('wheel', () => {})
-      }
+  // Spline removed
+
+  // Pause Rive animation on mobile; resume on desktop
+  useEffect(() => {
+    if (!rive) return
+    if (isMobile) {
+      rive.pause()
+    } else {
+      rive.play()
     }
-  }
+  }, [isMobile, rive])
 
   return (
     <div className="min-h-screen bg-black">
@@ -112,25 +67,12 @@ export default function CryptEDWebsite() {
         </div>
       </header>
 
-      {/* Spline 3D Hero Section with Overlay */}
-      <section className="pt-20 min-h-screen relative">
+      {/* Rive Hero Section (replacing Spline) */}
+      <section className="pt-20 min-h-screen relative bg-[#5b10fd]">
         <div className={`w-full h-screen ${isMobile ? 'pointer-events-none touch-none select-none' : ''}`}>
-          <Spline
-            scene="https://prod.spline.design/SDHjPMF7pkQD9ilj/scene.splinecode"
-            style={{ 
-              width: '100%', 
-              height: '100%',
-              ...(isMobile && {
-                pointerEvents: 'none',
-                touchAction: 'none',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                MozUserSelect: 'none',
-                msUserSelect: 'none'
-              })
-            }}
-            onLoad={handleSplineLoad}
-          />
+          {RiveComponent && (
+            <RiveComponent style={{ width: '100%', height: '100%' }} />
+          )}
         </div>
         
         {/* Upper Top Headline */}
