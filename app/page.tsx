@@ -6,6 +6,7 @@ import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
 // Removed Spline in favor of Rive hero
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
+import Image from 'next/image'
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
@@ -47,7 +48,10 @@ export default function CryptEDWebsite() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-white">CryptED</div>
+            <div className="flex items-center space-x-2">
+              <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={32} height={32} className="w-8 h-8" />
+              <div className="text-2xl font-bold text-white">CryptED</div>
+            </div>
             <div className="flex items-center space-x-4">
               <button className="text-white p-2">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,8 +101,15 @@ export default function CryptEDWebsite() {
           
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
-              <div className="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span className="text-gray-300 font-semibold">PJL</span>
+              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
+                <Image
+                  src="/avatars/paolo_ava.png"
+                  alt="Paolo Joseph Lising avatar"
+                  width={160}
+                  height={160}
+                  className="w-full h-full object-cover"
+                  priority
+                />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Paolo Joseph Lising</h3>
               <p className="text-gray-300 font-medium mb-4">CEO</p>
@@ -109,8 +120,14 @@ export default function CryptEDWebsite() {
             </div>
             
             <div className="text-center">
-              <div className="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span className="text-gray-300 font-semibold">ND</span>
+              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
+                <Image
+                  src="/avatars/nikolas_avatar.jpeg"
+                  alt="Nikolas Doan avatar"
+                  width={160}
+                  height={160}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Nikolas Doan</h3>
               <p className="text-gray-300 font-medium mb-4">COO</p>
@@ -121,8 +138,14 @@ export default function CryptEDWebsite() {
             </div>
             
             <div className="text-center">
-              <div className="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span className="text-gray-300 font-semibold">BN</span>
+              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden bg-gray-800">
+                <Image
+                  src="/avatars/brian_avatar.png"
+                  alt="Brian Nguyen avatar"
+                  width={160}
+                  height={160}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Brian Nguyen</h3>
               <p className="text-gray-300 font-medium mb-4">CTO</p>
@@ -139,14 +162,17 @@ export default function CryptEDWebsite() {
       {/* Footer */}
       <footer className="bg-black border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-2">
-              <div className="text-2xl font-bold text-white mb-4">CryptED</div>
+              <div className="flex items-center space-x-3 mb-4">
+                <Image src="/crypted-logo-tranparent.svg" alt="CryptED logo" width={36} height={36} className="w-9 h-9" />
+                <div className="text-2xl font-bold text-white">CryptED</div>
+              </div>
               <p className="text-gray-400 mb-6 max-w-md">
                 The future of crypto education. Learn, earn, and master blockchain technology through gamified learning.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://www.linkedin.com/company/crypted-vc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">LinkedIn</span>
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -177,6 +203,16 @@ export default function CryptEDWebsite() {
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h3>
+              <ul className="space-y-3">
+                <li><a href="mailto:brian@crypted.vc" className="text-gray-400 hover:text-white transition-colors">brian@crypted.vc</a></li>
+                <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
+                <li><a href="mailto:niko@crypted.vc" className="text-gray-400 hover:text-white transition-colors">niko@crypted.vc</a></li>
+                <li><a href="mailto:paolo@crypted.vc" className="text-gray-400 hover:text-white transition-colors">paolo@crypted.vc</a></li>
               </ul>
             </div>
           </div>
