@@ -23,6 +23,7 @@ export default function CryptEDWebsite() {
     twitter: string;
     linkedin: string;
   } | null>(null)
+  const [showLicenseModal, setShowLicenseModal] = useState(false)
 
   // Rive: black cat overlay on hero
   const { RiveComponent, rive } = useRive({
@@ -259,8 +260,16 @@ export default function CryptEDWebsite() {
                 <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Privacy Policy</a>
                 <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Terms of Service</a>
                 <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Cookie Policy</a>
+                <button
+                  type="button"
+                  onClick={() => setShowLicenseModal(true)}
+                  className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                >
+                  Disclaimer
+                </button>
               </div>
             </div>
+            
           </div>
         </div>
       </footer>
@@ -324,6 +333,63 @@ export default function CryptEDWebsite() {
                   >
                     <Linkedin className="h-6 w-6 text-white" />
                   </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
+      {/* License Attribution Modal */}
+      <AnimatePresence>
+      {showLicenseModal && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
+          onClick={() => setShowLicenseModal(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+        >
+          <motion.div
+            className="bg-gradient-to-b from-black via-[#5b10fd]/30 to-[#5b10fd] rounded-2xl border border-white/10 w-full max-w-2xl p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
+            exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+          >
+            <button
+              onClick={() => setShowLicenseModal(false)}
+              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              <div className="w-full">
+                <div className="w-full aspect-[4/5] bg-black/20 rounded-xl overflow-hidden">
+                  <Image
+                    src="/black_cat.riv"
+                    alt="Black Cat animation preview"
+                    width={600}
+                    height={750}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              <div className="text-left">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Black Cat Animation Attribution</h3>
+                <p className="text-gray-200 leading-relaxed mb-4">
+                  This product uses the 'Black Cat' animation asset created by <span className="font-semibold">fonckcolor</span>, available under a <span className="font-semibold">Creative Commons Attribution (CC BY)</span> license from the Rive.app Marketplace.
+                </p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-2 mb-6">
+                  <li>You must give appropriate credit to the creator, fonckcolor.</li>
+                  <li>Provide a link to the license and indicate if changes were made.</li>
+                  <li>You may adapt and build upon the asset for any purpose, even commercially.</li>
+                </ul>
+                <div className="flex items-center gap-4">
+                  <a href="#" className="text-white/90 hover:text-white underline underline-offset-2 text-sm">View asset on Rive.app</a>
+                  <a href="#" className="text-white/90 hover:text-white underline underline-offset-2 text-sm">View CC BY license</a>
                 </div>
               </div>
             </div>
