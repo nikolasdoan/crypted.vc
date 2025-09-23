@@ -10,9 +10,10 @@ export default function HeroSection() {
         <div className="space-y-8">
           <div className="space-y-6">
             <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
-              Game your way to{" "}
+              Game your way
+              <br />
               <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">
-                token literacy
+                to token literacy
               </span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed max-w-lg">

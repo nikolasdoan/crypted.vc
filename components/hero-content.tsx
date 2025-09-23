@@ -15,9 +15,9 @@ export default function HeroContent() {
         </div>
 
         <h1 className="text-5xl md:text-6xl md:leading-16 tracking-tight font-light text-white mb-4">
-          <span className="font-medium italic instrument">Game Your Way</span>
+          <span className="font-medium italic instrument">Game your way</span>
           <br />
-          <span className="font-light tracking-tight text-white">to Token Literacy</span>
+          <span className="font-light tracking-tight text-white">to token literacy</span>
         </h1>
 
         <p className="text-xs font-light text-white/70 mb-4 leading-relaxed">

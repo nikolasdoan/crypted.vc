@@ -8,8 +8,8 @@ import ShaderBackground from "@/components/shader-background"
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
 import { LampDemo } from "@/components/ui/lamp"
 import Image from 'next/image'
-import { Twitter, Linkedin, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Twitter, Linkedin, X, Github, GraduationCap } from 'lucide-react'
+import { motion, AnimatePresence, PanInfo } from 'framer-motion'
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
@@ -61,7 +61,7 @@ export default function CryptEDWebsite() {
     {
       id: 'paolo',
       name: 'Paolo Joseph Lising',
-      role: 'Managing Partner / Founder',
+      role: 'Founder / CEO',
       photo: '/avatars/portrait-paolo.png',
       description: 'Blockchain Researcher at Harvard University. Author on token economy business and policy.',
       twitter: '#',
@@ -96,12 +96,9 @@ export default function CryptEDWebsite() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={40} height={40} className="w-10 h-10 shrink-0" />
-              <div className="text-2xl font-bold text-white">CryptED</div>
+              <div className="text-2xl font-bold text-white brand-title">CryptED</div>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium">
-                Try it now
-              </button>
               <button className="text-white p-2">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -114,7 +111,7 @@ export default function CryptEDWebsite() {
 
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
-        className="pt-0 min-h-screen relative bg-black overflow-hidden"
+        className="pt-0 min-h-screen relative bg-black overflow-hidden pb-24"
         onClick={handleRiveInteraction}
         onTouchStart={handleRiveInteraction}
       >
@@ -150,25 +147,49 @@ export default function CryptEDWebsite() {
             <LampDemo />
           </div>
         </div>
+
+        {/* Store badges overlayed on hero, centered lower-half */}
+        <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 bottom-[12vh] md:bottom-[14vh]">
+          <a href="#" aria-label="Download on the App Store">
+            <Image
+              src="/Download_App_Store_RGB.png"
+              alt="Download on the App Store"
+              width={200}
+              height={60}
+              className="w-44 md:w-52 h-auto rounded-none"
+              sizes="(max-width: 768px) 11rem, 13rem"
+            />
+          </a>
+          <a href="#" aria-label="Get it on Google Play">
+            <Image
+              src="/Google_Play_Store.png"
+              alt="Get it on Google Play"
+              width={220}
+              height={64}
+              className="w-48 md:w-56 h-auto rounded-none"
+              sizes="(max-width: 768px) 12rem, 14rem"
+            />
+          </a>
+        </div>
+
       </section>
 
 
       {/* Team Section */}
-      <section id="team" className="relative py-20 min-h-[70vh] bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\]">
+      <section id="team" className="relative py-20 min-h-[70vh] bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">Meet Our Team</h2>
-            <p className="text-gray-300 mt-4">Leaders in blockchain, AI, and product design</p>
           </div>
 
           <div className="grid gap-4 md:gap-3 lg:gap-5 md:grid-cols-3 justify-items-center">
             {teamMembers.map((member) => (
               <div 
                 key={member.id}
-                className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden max-w-[240px] md:max-w-[260px] mx-auto cursor-pointer hover:border-purple-400/50 transition-all duration-300"
+                className="rounded-none border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden max-w-[240px] md:max-w-[260px] mx-auto cursor-pointer hover:border-purple-400/50 transition-all duration-300"
                 onClick={() => setSelectedMember(member)}
               >
-                <div className="w-full aspect-[4/5] bg-gray-800">
+                <div className="w-full aspect-[4/5] bg-\[\#e3e3e3\]">
                   <Image
                     src={member.photo}
                     alt={member.name}
@@ -182,22 +203,22 @@ export default function CryptEDWebsite() {
                   <h3 className="text-base font-semibold text-white">{member.name}</h3>
                   <p className="text-gray-400 text-[11px] mt-1">{member.role}</p>
                   <div className="flex items-center justify-center gap-3 mt-3">
-                    <a href="#" aria-label="X" className="text-white/80 hover:text-white transition-colors"><Twitter className="h-4 w-4" /></a>
+                    <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors"><Linkedin className="h-4 w-4" strokeWidth={1.25} /></a>
                     <span className="h-5 w-px bg-white/20" />
-                    <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors"><Linkedin className="h-4 w-4" /></a>
+                    {member.id === 'brian' ? (
+                      <a href="#" aria-label="GitHub" className="text-white/80 hover:text-white transition-colors"><Github className="h-4 w-4" strokeWidth={1.25} /></a>
+                    ) : member.id === 'nikolas' ? (
+                      <a href="#" aria-label="Academic" className="text-white/80 hover:text-white transition-colors"><GraduationCap className="h-4 w-4" strokeWidth={1.25} /></a>
+                    ) : (
+                      <a href="#" aria-label="X" className="text-white/80 hover:text-white transition-colors"><Twitter className="h-4 w-4" strokeWidth={1.25} /></a>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        {/* Subtle bottom glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-32 bg-gradient-to-t from-\[#5b10fd\]/50 to-transparent blur-2xl"
-        />
       </section>
-
 
       {/* Footer */}
       <footer className="bg-black border-t border-gray-800">
@@ -206,7 +227,7 @@ export default function CryptEDWebsite() {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
                 <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
-                <div className="text-2xl font-bold text-white">Crypted Ventures</div>
+                <div className="text-2xl font-bold text-white brand-title">Crypted Ventures</div>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
                 Learn, earn, and master blockchain with CryptED.
@@ -265,7 +286,7 @@ export default function CryptEDWebsite() {
                   onClick={() => setShowLicenseModal(true)}
                   className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
                 >
-                  Disclaimer
+                  Attribution
                 </button>
               </div>
             </div>
@@ -279,29 +300,40 @@ export default function CryptEDWebsite() {
       {selectedMember && (
         <motion.div 
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
-          onClick={() => setSelectedMember(null)}
+          onClick={() => { if (isMobile) setSelectedMember(null) }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.2 } }}
           exit={{ opacity: 0, transition: { duration: 0.2 } }}
         >
           <motion.div 
-            className="bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\] rounded-2xl border border-white/10 w-full max-w-3xl p-6 relative"
+            className="bg-black rounded-none border border-white/10 w-full max-w-3xl p-0 relative max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(91,16,253,0.35)]"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
             exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+            drag={isMobile ? 'y' : false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            onDragEnd={(e, info: PanInfo) => {
+              if (!isMobile) return
+              const draggedFarEnough = info.offset.y > 120
+              const fastEnough = info.velocity.y > 600
+              if (draggedFarEnough || fastEnough) setSelectedMember(null)
+            }}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedMember(null)}
-              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
-            >
-              <X className="h-6 w-6" />
-            </button>
+            {/* Sticky Close Button (circular) */}
+            <div className="sticky top-2 z-10 flex justify-end pr-2">
+              <button
+                onClick={() => setSelectedMember(null)}
+                aria-label="Close"
+                className="h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {/* Photo left */}
-              <div className="w-full">
-                <div className="w-full aspect-[4/5] bg-black/20 rounded-xl overflow-hidden">
+              <div className="w-full md:h-full">
+                <div className="w-full md:h-full bg-black/20 overflow-hidden max-h-[60vh] md:max-h-none">
                   <Image
                     src={selectedMember.photo}
                     alt={selectedMember.name}
@@ -313,25 +345,31 @@ export default function CryptEDWebsite() {
               </div>
 
               {/* Text right */}
-              <div className="text-left">
+              <div className="text-left p-6 md:p-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{selectedMember.name}</h2>
                 <p className="text-purple-300 mb-4">{selectedMember.role}</p>
                 <p className="text-gray-200 leading-relaxed mb-6">{selectedMember.description}</p>
 
                 <div className="flex items-center gap-4">
                   <a 
-                    href={selectedMember.twitter} 
-                    aria-label="X" 
-                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                  >
-                    <Twitter className="h-6 w-6 text-white" />
-                  </a>
-                  <a 
                     href={selectedMember.linkedin} 
                     aria-label="LinkedIn" 
                     className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
-                    <Linkedin className="h-6 w-6 text-white" />
+                    <Linkedin className="h-6 w-6 text-white" strokeWidth={1.25} />
+                  </a>
+                  <a 
+                    href={selectedMember.twitter} 
+                    aria-label={selectedMember.id === 'brian' ? 'GitHub' : selectedMember.id === 'nikolas' ? 'Academic' : 'X'} 
+                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    {selectedMember.id === 'brian' ? (
+                      <Github className="h-6 w-6 text-white" strokeWidth={1.25} />
+                    ) : selectedMember.id === 'nikolas' ? (
+                      <GraduationCap className="h-6 w-6 text-white" strokeWidth={1.25} />
+                    ) : (
+                      <Twitter className="h-6 w-6 text-white" strokeWidth={1.25} />
+                    )}
                   </a>
                 </div>
               </div>
@@ -346,52 +384,40 @@ export default function CryptEDWebsite() {
       {showLicenseModal && (
         <motion.div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
-          onClick={() => setShowLicenseModal(false)}
+          onClick={() => { if (isMobile) setShowLicenseModal(false) }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.2 } }}
           exit={{ opacity: 0, transition: { duration: 0.2 } }}
         >
           <motion.div
-            className="bg-gradient-to-b from-black via-[#5b10fd]/30 to-[#5b10fd] rounded-2xl border border-white/10 w-full max-w-2xl p-6 relative"
+            className="bg-black rounded-none border border-white/10 w-full max-w-3xl p-0 relative max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(91,16,253,0.35)]"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
             exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+            drag={isMobile ? 'y' : false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            onDragEnd={(e, info: PanInfo) => {
+              if (!isMobile) return
+              const draggedFarEnough = info.offset.y > 120
+              const fastEnough = info.velocity.y > 600
+              if (draggedFarEnough || fastEnough) setShowLicenseModal(false)
+            }}
           >
-            <button
-              onClick={() => setShowLicenseModal(false)}
-              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
-            >
-              <X className="h-6 w-6" />
-            </button>
+            <div className="sticky top-2 z-10 flex justify-end pr-2">
+              <button
+                onClick={() => setShowLicenseModal(false)}
+                aria-label="Close"
+                className="h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-              <div className="w-full">
-                <div className="w-full aspect-[4/5] bg-black/20 rounded-xl overflow-hidden">
-                  <Image
-                    src="/black_cat.riv"
-                    alt="Black Cat animation preview"
-                    width={600}
-                    height={750}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
-              <div className="text-left">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Black Cat Animation Attribution</h3>
-                <p className="text-gray-200 leading-relaxed mb-4">
-                  This product uses the 'Black Cat' animation asset created by <span className="font-semibold">fonckcolor</span>, available under a <span className="font-semibold">Creative Commons Attribution (CC BY)</span> license from the Rive.app Marketplace.
-                </p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-2 mb-6">
-                  <li>You must give appropriate credit to the creator, fonckcolor.</li>
-                  <li>Provide a link to the license and indicate if changes were made.</li>
-                  <li>You may adapt and build upon the asset for any purpose, even commercially.</li>
-                </ul>
-                <div className="flex items-center gap-4">
-                  <a href="#" className="text-white/90 hover:text-white underline underline-offset-2 text-sm">View asset on Rive.app</a>
-                  <a href="#" className="text-white/90 hover:text-white underline underline-offset-2 text-sm">View CC BY license</a>
-                </div>
-              </div>
+            <div className="text-left p-6 md:p-8">
+              <p className="text-gray-200 leading-relaxed">
+                This product uses the 'Black Cat' animation asset created by fonckcolor, available under a Creative Commons Attribution (CC BY) license from the Rive.app Marketplace.
+              </p>
             </div>
           </motion.div>
         </motion.div>

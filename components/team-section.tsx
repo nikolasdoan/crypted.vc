@@ -13,8 +13,8 @@ export default function TeamSection() {
     {
       name: "Nikolas Doan",
       role: "COO",
-      bio: "MSc Robotics (NTU, exp. '26). AI/Robotics researcher. Former Google Cloud Startups.",
-      image: "/professional-headshot-of-nikolas-doan--coo--tech-e.jpg",
+      bio: "MSc AI/Robotics (NTU, exp. '26). Former Google Cloud Startups. CEO TECXMATE.COM",
+      image: "/professional-headshot-of-nikolas-doan--coo.jpg",
     },
     {
       name: "Brian Nguyen",
@@ -37,14 +37,13 @@ export default function TeamSection() {
         <div className="grid md:grid-cols-3 gap-8">
           {team.map((member, index) => (
             <div key={index} className="group">
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-300">
+              <div className="bg-white/5 backdrop-blur-sm rounded-none p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-300">
                 <div className="relative mb-6">
                   <img
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
                     className="w-32 h-32 rounded-full mx-auto object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-full blur-xl"></div>
                 </div>
 
                 <div className="text-center">
