@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
           <div className="space-y-6">
-            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
               Game your way
               <br />
               <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">

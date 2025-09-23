@@ -14,7 +14,7 @@ export function LampDemo() {
           duration: 1.2,
           ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for ultra-smooth
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-3xl font-medium tracking-tight text-transparent md:text-6xl"
       >
         Game your way <br /> to token literacy
       </motion.h1>

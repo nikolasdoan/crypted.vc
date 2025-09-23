@@ -311,35 +311,26 @@ export default function CryptEDWebsite() {
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
             exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
-            drag={isMobile ? 'y' : false}
-            dragConstraints={{ top: 0, bottom: 0 }}
-            onDragEnd={(e, info: PanInfo) => {
-              if (!isMobile) return
-              const draggedFarEnough = info.offset.y > 120
-              const fastEnough = info.velocity.y > 600
-              if (draggedFarEnough || fastEnough) setSelectedMember(null)
-            }}
+            drag={false}
           >
-            {/* Sticky Close Button (circular) */}
-            <div className="sticky top-2 z-10 flex justify-end pr-2">
-              <button
-                onClick={() => setSelectedMember(null)}
-                aria-label="Close"
-                className="h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Close Button (overlay, no layout shift) */}
+            <button
+              onClick={() => setSelectedMember(null)}
+              aria-label="Close"
+              className="absolute top-2 right-2 z-20 h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {/* Photo left */}
               <div className="w-full md:h-full">
-                <div className="w-full md:h-full bg-black/20 overflow-hidden max-h-[60vh] md:max-h-none">
+                <div className="w-full aspect-square md:aspect-auto md:h-full overflow-hidden max-h-[80vh] md:max-h-none">
                   <Image
                     src={selectedMember.photo}
                     alt={selectedMember.name}
                     width={600}
                     height={750}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-[center_20%] md:object-contain"
                   />
                 </div>
               </div>
@@ -395,24 +386,15 @@ export default function CryptEDWebsite() {
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
             exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
-            drag={isMobile ? 'y' : false}
-            dragConstraints={{ top: 0, bottom: 0 }}
-            onDragEnd={(e, info: PanInfo) => {
-              if (!isMobile) return
-              const draggedFarEnough = info.offset.y > 120
-              const fastEnough = info.velocity.y > 600
-              if (draggedFarEnough || fastEnough) setShowLicenseModal(false)
-            }}
+            drag={false}
           >
-            <div className="sticky top-2 z-10 flex justify-end pr-2">
-              <button
-                onClick={() => setShowLicenseModal(false)}
-                aria-label="Close"
-                className="h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            <button
+              onClick={() => setShowLicenseModal(false)}
+              aria-label="Close"
+              className="absolute top-2 right-2 z-20 h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
 
             <div className="text-left p-6 md:p-8">
               <p className="text-gray-200 leading-relaxed">
