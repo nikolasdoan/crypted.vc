@@ -8,11 +8,21 @@ import ShaderBackground from "@/components/shader-background"
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
 import { LampDemo } from "@/components/ui/lamp"
 import Image from 'next/image'
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials"
+import { Twitter, Linkedin, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function CryptEDWebsite() {
   const [isMobile, setIsMobile] = useState(false)
   const [riveInteracted, setRiveInteracted] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<{
+    id: string;
+    name: string;
+    role: string;
+    photo: string;
+    description: string;
+    twitter: string;
+    linkedin: string;
+  } | null>(null)
 
   // Rive: black cat overlay on hero
   const { RiveComponent, rive } = useRive({
@@ -46,29 +56,36 @@ export default function CryptEDWebsite() {
     setRiveInteracted(!riveInteracted)
   }
 
-  const testimonials = [
+  const teamMembers = [
     {
-      quote: "Blockchain Researcher at Harvard University. Author on token economy business and policy.",
-      name: "Paolo Joseph Lising",
-      designation: "CEO",
-      src: "/avatars/paolo_ava.png",
-      email: "paolo@crypted.vc",
+      id: 'paolo',
+      name: 'Paolo Joseph Lising',
+      role: 'Managing Partner / Founder',
+      photo: '/avatars/portrait-paolo.png',
+      description: 'Blockchain Researcher at Harvard University. Author on token economy business and policy.',
+      twitter: '#',
+      linkedin: '#'
     },
     {
-      quote: "EE & AI Engineer, App Developer",
-      name: "Brian Nguyen",
-      designation: "CTO",
-      src: "/avatars/brian_avatar.png",
-      email: "brian@crypted.vc",
+      id: 'brian',
+      name: 'Brian Nguyen',
+      role: 'CTO',
+      photo: '/avatars/portrait-brian.png',
+      description: 'EE & AI Engineer, App Developer',
+      twitter: '#',
+      linkedin: '#'
     },
     {
-      quote: "Product Designer",
-      name: "Nikolas Doan",
-      designation: "COO",
-      src: "/avatars/nikolas_avatar.jpeg",
-      email: "niko@crypted.vc",
-    },
+      id: 'nikolas',
+      name: 'Nikolas Doan',
+      role: 'COO',
+      photo: '/avatars/portrait-niko.png',
+      description: 'Product Designer',
+      twitter: '#',
+      linkedin: '#'
+    }
   ]
+
 
   return (
     <div className="min-h-screen bg-black">
@@ -138,10 +155,40 @@ export default function CryptEDWebsite() {
       {/* Team Section */}
       <section id="team" className="relative py-20 min-h-[70vh] bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">Meet Our Team</h2>
+            <p className="text-gray-300 mt-4">Leaders in blockchain, AI, and product design</p>
           </div>
-          <AnimatedTestimonials testimonials={testimonials} autoplay className="py-0" />
+
+          <div className="grid gap-4 md:gap-3 lg:gap-5 md:grid-cols-3 justify-items-center">
+            {teamMembers.map((member) => (
+              <div 
+                key={member.id}
+                className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden max-w-[240px] md:max-w-[260px] mx-auto cursor-pointer hover:border-purple-400/50 transition-all duration-300"
+                onClick={() => setSelectedMember(member)}
+              >
+                <div className="w-full aspect-[4/5] bg-gray-800">
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    width={800}
+                    height={1000}
+                    className="w-full h-full object-cover"
+                    priority={member.id === 'paolo'}
+                  />
+                </div>
+                <div className="p-3 text-center">
+                  <h3 className="text-base font-semibold text-white">{member.name}</h3>
+                  <p className="text-gray-400 text-[11px] mt-1">{member.role}</p>
+                  <div className="flex items-center justify-center gap-3 mt-3">
+                    <a href="#" aria-label="X" className="text-white/80 hover:text-white transition-colors"><Twitter className="h-4 w-4" /></a>
+                    <span className="h-5 w-px bg-white/20" />
+                    <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors"><Linkedin className="h-4 w-4" /></a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         {/* Subtle bottom glow */}
         <div
@@ -217,6 +264,73 @@ export default function CryptEDWebsite() {
           </div>
         </div>
       </footer>
+
+      {/* Team Member Modal */}
+      <AnimatePresence>
+      {selectedMember && (
+        <motion.div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
+          onClick={() => setSelectedMember(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+        >
+          <motion.div 
+            className="bg-gradient-to-b from-black via-\[#5b10fd\]/30 to-\[#5b10fd\] rounded-2xl border border-white/10 w-full max-w-3xl p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
+            exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedMember(null)}
+              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              {/* Photo left */}
+              <div className="w-full">
+                <div className="w-full aspect-[4/5] bg-black/20 rounded-xl overflow-hidden">
+                  <Image
+                    src={selectedMember.photo}
+                    alt={selectedMember.name}
+                    width={600}
+                    height={750}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Text right */}
+              <div className="text-left">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{selectedMember.name}</h2>
+                <p className="text-purple-300 mb-4">{selectedMember.role}</p>
+                <p className="text-gray-200 leading-relaxed mb-6">{selectedMember.description}</p>
+
+                <div className="flex items-center gap-4">
+                  <a 
+                    href={selectedMember.twitter} 
+                    aria-label="X" 
+                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    <Twitter className="h-6 w-6 text-white" />
+                  </a>
+                  <a 
+                    href={selectedMember.linkedin} 
+                    aria-label="LinkedIn" 
+                    className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    <Linkedin className="h-6 w-6 text-white" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+      </AnimatePresence>
     </div>
   )
 }
