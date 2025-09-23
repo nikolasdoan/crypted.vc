@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Header from "@/components/header"
 import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
@@ -23,6 +23,7 @@ export default function CryptEDWebsite() {
     twitter: string;
     linkedin: string;
   } | null>(null)
+  const heroRef = useRef<HTMLDivElement | null>(null)
 
   // Rive: black cat overlay on hero
   const { RiveComponent, rive } = useRive({
@@ -51,9 +52,45 @@ export default function CryptEDWebsite() {
     rive.play()
   }, [rive])
 
+  // On mobile, auto-trigger the hero interaction when the hero comes into view
+  useEffect(() => {
+    if (!isMobile) return
+    const sectionEl = heroRef.current
+    if (!sectionEl) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (entry.isIntersecting) {
+          setRiveInteracted(true)
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -20% 0px' }
+    )
+
+    observer.observe(sectionEl)
+
+    // If already in view on mount, trigger immediately
+    requestAnimationFrame(() => {
+      const rect = sectionEl.getBoundingClientRect()
+      const vh = window.innerHeight || document.documentElement.clientHeight
+      if (rect.top < vh * 0.9 && rect.bottom > vh * 0.1) {
+        setRiveInteracted(true)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [isMobile])
+
   // Toggle between Rive animation and lamp/text
   const handleRiveInteraction = () => {
-    setRiveInteracted(!riveInteracted)
+    if (isMobile) {
+      // On mobile, a tap should bring the animation forward
+      setRiveInteracted(true)
+    } else {
+      // Desktop retains toggle behavior
+      setRiveInteracted(!riveInteracted)
+    }
   }
 
   const teamMembers = [
@@ -113,6 +150,7 @@ export default function CryptEDWebsite() {
 
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
+        ref={heroRef}
         className="pt-0 min-h-screen relative bg-black overflow-hidden"
         onClick={handleRiveInteraction}
         onTouchStart={handleRiveInteraction}
