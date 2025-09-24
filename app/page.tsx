@@ -8,7 +8,7 @@ import ShaderBackground from "@/components/shader-background"
 import { useRive, Layout, Fit, Alignment } from '@rive-app/react-canvas'
 import { LampDemo } from "@/components/ui/lamp"
 import Image from 'next/image'
-import { Twitter, Linkedin, X, Github, GraduationCap } from 'lucide-react'
+import { Twitter, Linkedin, X, Github, GraduationCap, PenTool, Building2 } from 'lucide-react'
 import { motion, AnimatePresence, PanInfo } from 'framer-motion'
 
 export default function CryptEDWebsite() {
@@ -24,6 +24,10 @@ export default function CryptEDWebsite() {
     linkedin: string;
   } | null>(null)
   const [showLicenseModal, setShowLicenseModal] = useState(false)
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false)
+  const [showTermsModal, setShowTermsModal] = useState(false)
+  const [privacyContent, setPrivacyContent] = useState<string>('')
+  const [termsContent, setTermsContent] = useState<string>('')
 
   // Rive: black cat overlay on hero
   const { RiveComponent, rive } = useRive({
@@ -61,29 +65,29 @@ export default function CryptEDWebsite() {
     {
       id: 'paolo',
       name: 'Paolo Joseph Lising',
-      role: 'Founder / CEO',
+      role: 'CEO',
       photo: '/avatars/portrait-paolo.png',
-      description: 'Blockchain Researcher at Harvard University. Author on token economy business and policy.',
-      twitter: '#',
-      linkedin: '#'
+      description: 'ALM Candidate, Harvard University',
+      twitter: 'https://dash.harvard.edu/entities/publication/38c680e1-fd38-4927-8007-9b99784a95fb',
+      linkedin: 'https://www.linkedin.com/in/paolojoseph/'
     },
     {
       id: 'brian',
       name: 'Brian Nguyen',
-      role: 'CTO',
+      role: 'CTO & Developer',
       photo: '/avatars/portrait-brian.png',
-      description: 'EE & AI Engineer, App Developer',
-      twitter: '#',
-      linkedin: '#'
+      description: 'MSc. Electrical Engineering, NTUST',
+      twitter: 'https://www.tecxmate.com',
+      linkedin: 'https://www.linkedin.com/in/brian-nguyen-587825235/'
     },
     {
       id: 'nikolas',
       name: 'Nikolas Doan',
-      role: 'COO',
+      role: 'COO & Designer',
       photo: '/avatars/portrait-niko.png',
-      description: 'Product Designer',
-      twitter: '#',
-      linkedin: '#'
+      description: 'MSc. AI/Robotics, NTU',
+      twitter: 'https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AH8HC4wBT4T5k1ixLLhNjPNv_RVi-PwijNu8oMXqf4mh7nL21PUT5zluCMjJkZyOBmcdy1_51pRTnYe7erhljl_XOl2nQ3XXV8TW7isW6-0&user=ffn9iV8AAAAJ',
+      linkedin: 'https://www.linkedin.com/in/nikolasdoan/'
     }
   ]
 
@@ -98,13 +102,7 @@ export default function CryptEDWebsite() {
               <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={40} height={40} className="w-10 h-10 shrink-0" />
               <div className="text-2xl font-bold text-white brand-title">CryptED</div>
             </div>
-            <div className="flex items-center space-x-4">
-              <button className="text-white p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
+            <div className="flex items-center space-x-4" />
           </div>
         </div>
       </header>
@@ -112,8 +110,6 @@ export default function CryptEDWebsite() {
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
         className="pt-0 min-h-screen relative bg-black overflow-hidden pb-24"
-        onClick={handleRiveInteraction}
-        onTouchStart={handleRiveInteraction}
       >
         {/* Rive Animation - Ultra smooth transition to front */}
         <div 
@@ -175,12 +171,26 @@ export default function CryptEDWebsite() {
       </section>
 
 
+      {/* Mission Section */}
+      <section id="mission" className="relative py-16 md:py-20 bg-black">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Our Mission</h2>
+          <p className="text-gray-200 leading-relaxed text-lg">
+            At CryptED, we make learning about Blockchain and Web3 fun and engaging. Through interactive gameplay,
+            we help users understand the opportunities of this technology while also raising awareness of the risks it can
+            pose—especially for vulnerable communities. Our mission is to give everyone the tools to stay safe and benefit
+            from the world of Blockchain.
+          </p>
+          </div>
+        </section>
+
+
       {/* Team Section */}
       <section id="team" className="relative py-20 min-h-[70vh] bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">Meet Our Team</h2>
-          </div>
+                </div>
 
           <div className="grid gap-4 md:gap-3 lg:gap-5 md:grid-cols-3 justify-items-center">
             {teamMembers.map((member) => (
@@ -203,22 +213,22 @@ export default function CryptEDWebsite() {
                   <h3 className="text-base font-semibold text-white">{member.name}</h3>
                   <p className="text-gray-400 text-[11px] mt-1">{member.role}</p>
                   <div className="flex items-center justify-center gap-3 mt-3">
-                    <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors"><Linkedin className="h-4 w-4" strokeWidth={1.25} /></a>
+                    <a href={member.linkedin} aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" onClick={(e)=>e.stopPropagation()}><Linkedin className="h-4 w-4" strokeWidth={1.25} /></a>
                     <span className="h-5 w-px bg-white/20" />
                     {member.id === 'brian' ? (
-                      <a href="#" aria-label="GitHub" className="text-white/80 hover:text-white transition-colors"><Github className="h-4 w-4" strokeWidth={1.25} /></a>
+                      <a href={member.twitter} aria-label="Company" className="text-white/80 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" onClick={(e)=>e.stopPropagation()}><Building2 className="h-4 w-4" strokeWidth={1.25} /></a>
                     ) : member.id === 'nikolas' ? (
-                      <a href="#" aria-label="Academic" className="text-white/80 hover:text-white transition-colors"><GraduationCap className="h-4 w-4" strokeWidth={1.25} /></a>
+                      <a href={member.twitter} aria-label="Academic" className="text-white/80 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" onClick={(e)=>e.stopPropagation()}><GraduationCap className="h-4 w-4" strokeWidth={1.25} /></a>
                     ) : (
-                      <a href="#" aria-label="X" className="text-white/80 hover:text-white transition-colors"><Twitter className="h-4 w-4" strokeWidth={1.25} /></a>
+                      <a href={member.twitter} aria-label="Author" className="text-white/80 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" onClick={(e)=>e.stopPropagation()}><PenTool className="h-4 w-4" strokeWidth={1.25} /></a>
                     )}
-                  </div>
+              </div>
                 </div>
               </div>
             ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Footer */}
       <footer className="bg-black border-t border-gray-800">
@@ -253,7 +263,6 @@ export default function CryptEDWebsite() {
               <ul className="space-y-3">
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Crypted Game</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Venture Capital</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">More</a></li>
               </ul>
             </div>
             
@@ -261,7 +270,6 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h3>
               <ul className="space-y-3">
                 <li><a href="#team" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
@@ -278,15 +286,40 @@ export default function CryptEDWebsite() {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-500 text-sm">© 2024 Crypted Ventures. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Privacy Policy</a>
-                <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Terms of Service</a>
-                <a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">Cookie Policy</a>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      const res = await fetch('/privacy_policy.md')
+                      const txt = await res.text()
+                      setPrivacyContent(txt)
+                      setShowPrivacyModal(true)
+                    } catch {}
+                  }}
+                  className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                >
+                  Privacy Policy
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      const res = await fetch('/terms_of_service.md')
+                      const txt = await res.text()
+                      setTermsContent(txt)
+                      setShowTermsModal(true)
+                    } catch {}
+                  }}
+                  className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                >
+                  Terms of Service
+                </button>
                 <button
                   type="button"
                   onClick={() => setShowLicenseModal(true)}
                   className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
                 >
-                  Attribution
+                  Attributions
                 </button>
               </div>
             </div>
@@ -351,15 +384,15 @@ export default function CryptEDWebsite() {
                   </a>
                   <a 
                     href={selectedMember.twitter} 
-                    aria-label={selectedMember.id === 'brian' ? 'GitHub' : selectedMember.id === 'nikolas' ? 'Academic' : 'X'} 
+                    aria-label={selectedMember.id === 'brian' ? 'Company' : selectedMember.id === 'nikolas' ? 'Academic' : 'Author'} 
                     className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
                     {selectedMember.id === 'brian' ? (
-                      <Github className="h-6 w-6 text-white" strokeWidth={1.25} />
+                      <Building2 className="h-6 w-6 text-white" strokeWidth={1.25} />
                     ) : selectedMember.id === 'nikolas' ? (
                       <GraduationCap className="h-6 w-6 text-white" strokeWidth={1.25} />
                     ) : (
-                      <Twitter className="h-6 w-6 text-white" strokeWidth={1.25} />
+                      <PenTool className="h-6 w-6 text-white" strokeWidth={1.25} />
                     )}
                   </a>
                 </div>
@@ -394,13 +427,77 @@ export default function CryptEDWebsite() {
               className="absolute top-2 right-2 z-20 h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
             >
               <X className="h-5 w-5" />
-            </button>
+              </button>
 
             <div className="text-left p-6 md:p-8">
               <p className="text-gray-200 leading-relaxed">
                 This product uses the 'Black Cat' animation asset created by fonckcolor, available under a Creative Commons Attribution (CC BY) license from the Rive.app Marketplace.
               </p>
             </div>
+          </motion.div>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
+      {/* Privacy Policy Modal */}
+      <AnimatePresence>
+      {showPrivacyModal && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
+          onClick={() => setShowPrivacyModal(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+        >
+          <motion.div
+            className="bg-black rounded-none border border-white/10 w-full max-w-3xl p-0 relative max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(91,16,253,0.35)]"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
+            exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+          >
+            <button
+              onClick={() => setShowPrivacyModal(false)}
+              aria-label="Close"
+              className="absolute top-2 right-2 z-20 h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="text-left p-6 md:p-8 prose prose-invert max-w-none">
+              <div dangerouslySetInnerHTML={{ __html: privacyContent.replace(/\n/g, '<br/>') }} />
+          </div>
+          </motion.div>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
+      {/* Terms of Service Modal */}
+      <AnimatePresence>
+      {showTermsModal && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[3000] flex items-center justify-center p-4"
+          onClick={() => setShowTermsModal(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+        >
+          <motion.div
+            className="bg-black rounded-none border border-white/10 w-full max-w-3xl p-0 relative max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(91,16,253,0.35)]"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 24 } }}
+            exit={{ opacity: 0, y: 12, scale: 0.98, transition: { duration: 0.2 } }}
+          >
+            <button
+              onClick={() => setShowTermsModal(false)}
+              aria-label="Close"
+              className="absolute top-2 right-2 z-20 h-9 w-9 inline-flex items-center justify-center rounded-full bg-black/40 text-white/80 hover:text-white hover:bg-black/60 border border-white/20 backdrop-blur-sm transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="text-left p-6 md:p-8 prose prose-invert max-w-none">
+              <div dangerouslySetInnerHTML={{ __html: termsContent.replace(/\n/g, '<br/>') }} />
+      </div>
           </motion.div>
         </motion.div>
       )}
