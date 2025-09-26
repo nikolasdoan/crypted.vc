@@ -34,8 +34,11 @@ export default function CryptEDWebsite() {
     src: '/black_cat.riv',
     autoplay: true,
     stateMachines: ['BLACK CATW'],
-    layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center })
-  })
+    layout: new Layout({ 
+      fit: isMobile ? Fit.Cover : Fit.Contain, 
+      alignment: Alignment.Center 
+    })
+  }, [isMobile]) // Re-render when isMobile changes
 
   useEffect(() => {
     const checkMobile = () => {
@@ -61,15 +64,52 @@ export default function CryptEDWebsite() {
     setRiveInteracted((prev) => !prev)
   }
 
+  // Touch handling state
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number; time: number } | null>(null)
+
   // Safe tap handler for the hero that ignores clicks on links/buttons
-  const handleHeroTap: React.MouseEventHandler<HTMLDivElement> & React.TouchEventHandler<HTMLDivElement> = (e: any) => {
+  const handleHeroTap: React.MouseEventHandler<HTMLDivElement> = (e: any) => {
+    console.log('Hero click detected!', e.type)
     const target = e.target as HTMLElement
     if (!target) return
-    // Ignore taps on interactive elements
+    // Ignore clicks on interactive elements
     if (target.closest('a, button, [data-no-hero-toggle]')) {
+      console.log('Click on interactive element, ignoring')
       return
     }
+    console.log('Toggling Rive interaction')
     handleRiveInteraction()
+  }
+
+  // Touch handlers to distinguish between taps and swipes
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    const touch = e.touches[0]
+    setTouchStart({
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now()
+    })
+  }
+
+  const handleTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!touchStart) return
+
+    const touch = e.changedTouches[0]
+    const deltaX = Math.abs(touch.clientX - touchStart.x)
+    const deltaY = Math.abs(touch.clientY - touchStart.y)
+    const deltaTime = Date.now() - touchStart.time
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+
+    // If it's a quick tap (not a swipe) and not on interactive elements
+    if (deltaTime < 300 && distance < 50) {
+      const target = e.target as HTMLElement
+      if (!target.closest('a, button, [data-no-hero-toggle]')) {
+        console.log('Touch tap detected, toggling Rive interaction')
+        handleRiveInteraction()
+      }
+    }
+    // If it's a swipe, let the browser handle scrolling naturally
+    setTouchStart(null)
   }
 
   const teamMembers = [
@@ -120,9 +160,10 @@ export default function CryptEDWebsite() {
 
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
-        className="pt-0 min-h-screen relative bg-black overflow-hidden pb-24"
+        className="pt-0 min-h-screen relative bg-black overflow-hidden pb-24 cursor-pointer"
         onClick={handleHeroTap}
-        onTouchStart={handleHeroTap}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Rive Animation - Ultra smooth transition to front */}
         <div 
@@ -135,10 +176,12 @@ export default function CryptEDWebsite() {
           {RiveComponent && (
             <RiveComponent 
               style={{ 
-                width: '100%', 
-                height: '100%',
+                width: isMobile ? '120%' : '100%', 
+                height: isMobile ? '120%' : '100%',
+                marginLeft: isMobile ? '-10%' : '0',
+                marginTop: isMobile ? '-10%' : '0',
                 touchAction: 'pan-y',
-                pointerEvents: isMobile ? 'none' : (riveInteracted ? 'auto' : 'none')
+                pointerEvents: 'none' // Always disable pointer events on Rive to allow clicks through to hero
               }} 
             />
           )}
@@ -252,12 +295,6 @@ export default function CryptEDWebsite() {
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <span className="sr-only">Twitter</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                  </svg>
-                </a>
               </div>
             </div>
             
@@ -273,21 +310,13 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h3>
               <ul className="space-y-3">
                 <li><a href="#team" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h3>
-              <ul className="space-y-3">
-                <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
               </ul>
             </div>
           </div>
           
           <div className="mt-12 pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-500 text-sm">© 2024 Crypted Ventures. All rights reserved.</p>
+              <p className="text-gray-500 text-sm">© 2025 Crypted Ventures. All rights reserved.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <button
                   type="button"
