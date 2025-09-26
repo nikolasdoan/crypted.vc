@@ -58,7 +58,18 @@ export default function CryptEDWebsite() {
 
   // Toggle between Rive animation and lamp/text
   const handleRiveInteraction = () => {
-    setRiveInteracted(!riveInteracted)
+    setRiveInteracted((prev) => !prev)
+  }
+
+  // Safe tap handler for the hero that ignores clicks on links/buttons
+  const handleHeroTap: React.MouseEventHandler<HTMLDivElement> & React.TouchEventHandler<HTMLDivElement> = (e: any) => {
+    const target = e.target as HTMLElement
+    if (!target) return
+    // Ignore taps on interactive elements
+    if (target.closest('a, button, [data-no-hero-toggle]')) {
+      return
+    }
+    handleRiveInteraction()
   }
 
   const teamMembers = [
@@ -110,6 +121,8 @@ export default function CryptEDWebsite() {
       {/* Rive Hero Section with Lamp Overlay */}
       <section 
         className="pt-0 min-h-screen relative bg-black overflow-hidden pb-24"
+        onClick={handleHeroTap}
+        onTouchStart={handleHeroTap}
       >
         {/* Rive Animation - Ultra smooth transition to front */}
         <div 
@@ -144,9 +157,9 @@ export default function CryptEDWebsite() {
           </div>
         </div>
 
-        {/* Store badges overlayed on hero, centered lower-half */}
-        <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 bottom-[12vh] md:bottom-[14vh]">
-          <a href="#" aria-label="Download on the App Store">
+        {/* App Store badge overlayed on hero, centered lower-half */}
+        <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex items-center justify-center bottom-[12vh] md:bottom-[14vh]">
+          <a href="https://apps.apple.com/tw/app/crypted-blockchain-education/id6747925774?l=en-GB" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
             <Image
               src="/Download_App_Store_RGB.png"
               alt="Download on the App Store"
@@ -154,16 +167,6 @@ export default function CryptEDWebsite() {
               height={60}
               className="w-44 md:w-52 h-auto rounded-none"
               sizes="(max-width: 768px) 11rem, 13rem"
-            />
-          </a>
-          <a href="#" aria-label="Get it on Google Play">
-            <Image
-              src="/Google_Play_Store.png"
-              alt="Get it on Google Play"
-              width={220}
-              height={64}
-              className="w-48 md:w-56 h-auto rounded-none"
-              sizes="(max-width: 768px) 12rem, 14rem"
             />
           </a>
         </div>
