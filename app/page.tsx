@@ -310,6 +310,7 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h3>
               <ul className="space-y-3">
                 <li><a href="#team" className="text-gray-400 hover:text-white transition-colors">About</a></li>
+                <li><a href="mailto:hello@crypted.vc" className="text-gray-400 hover:text-white transition-colors">hello@crypted.vc</a></li>
               </ul>
             </div>
           </div>
