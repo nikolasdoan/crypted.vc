@@ -279,7 +279,7 @@ export default function CryptEDWebsite() {
       {/* Footer */}
       <footer className="bg-black border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-5 gap-8">
+          <div className="grid md:grid-cols-5 gap-12">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
                 <Image src="/crypted-logo-tranparent-cropped.svg" alt="CryptED logo" width={44} height={44} className="w-11 h-11 shrink-0" />
@@ -302,7 +302,6 @@ export default function CryptEDWebsite() {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h3>
               <ul className="space-y-3">
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Crypted Blockchain Education</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Venture Capital</a></li>
               </ul>
             </div>
             
