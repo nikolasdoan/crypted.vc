@@ -12,7 +12,7 @@ export default function TeamSection() {
     },
     {
       name: "Nikolas Doan",
-      role: "COO",
+      role: "CPO",
       bio: "MSc AI/Robotics (NTU, exp. '26). Former Google Cloud Startups. CEO TECXMATE.COM",
       image: "/professional-headshot-of-nikolas-doan--coo.jpg",
     },

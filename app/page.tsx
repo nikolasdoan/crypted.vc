@@ -134,7 +134,7 @@ export default function CryptEDWebsite() {
     {
       id: 'nikolas',
       name: 'Nikolas Doan',
-      role: 'COO & Designer',
+      role: 'CPO & Designer',
       photo: '/avatars/portrait-niko.png',
       description: 'MSc. AI/Robotics, NTU',
       twitter: 'https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AH8HC4wBT4T5k1ixLLhNjPNv_RVi-PwijNu8oMXqf4mh7nL21PUT5zluCMjJkZyOBmcdy1_51pRTnYe7erhljl_XOl2nQ3XXV8TW7isW6-0&user=ffn9iV8AAAAJ',
@@ -301,7 +301,7 @@ export default function CryptEDWebsite() {
             <div>
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Crypted Game</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Crypted Blockchain Education</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Venture Capital</a></li>
               </ul>
             </div>

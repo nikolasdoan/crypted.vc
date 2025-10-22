@@ -53,6 +53,9 @@ export default function CTASection() {
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
               Terms
             </a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              Contact
+            </a>
           </div>
         </div>
       </footer>
