@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Header from "@/components/header"
 import HeroContent from "@/components/hero-content"
 import ShaderBackground from "@/components/shader-background"
@@ -30,15 +30,17 @@ export default function CryptEDWebsite() {
   const [termsContent, setTermsContent] = useState<string>('')
 
   // Rive: black cat overlay on hero
+  const riveLayout = useMemo(() => new Layout({
+    fit: isMobile ? Fit.Cover : Fit.Contain,
+    alignment: Alignment.Center
+  }), [isMobile])
+
   const { RiveComponent, rive } = useRive({
     src: '/black_cat.riv',
     autoplay: true,
     stateMachines: ['BLACK CATW'],
-    layout: new Layout({ 
-      fit: isMobile ? Fit.Cover : Fit.Contain, 
-      alignment: Alignment.Center 
-    })
-  }, [isMobile]) // Re-render when isMobile changes
+    layout: riveLayout
+  }) // Re-render when isMobile changes
 
   useEffect(() => {
     const checkMobile = () => {
@@ -200,18 +202,43 @@ export default function CryptEDWebsite() {
           </div>
         </div>
 
-        {/* App Store badge overlayed on hero, centered lower-half */}
+        {/* App Store badge + waitlist CTA overlayed on hero, centered lower-half */}
         <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex items-center justify-center bottom-[12vh] md:bottom-[14vh]">
-          <a href="https://apps.apple.com/tw/app/crypted-blockchain-education/id6747925774?l=en-GB" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
-            <Image
-              src="/Download_App_Store_RGB.png"
-              alt="Download on the App Store"
-              width={200}
-              height={60}
-              className="w-44 md:w-52 h-auto rounded-none"
-              sizes="(max-width: 768px) 11rem, 13rem"
-            />
-          </a>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <a
+              href="https://apps.apple.com/tw/app/crypted-blockchain-education/id6747925774?l=en-GB"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download on the App Store"
+            >
+              <Image
+                src="/Download_App_Store_RGB.png"
+                alt="Download on the App Store"
+                width={200}
+                height={60}
+                className="w-44 md:w-52 h-auto rounded-none"
+                sizes="(max-width: 768px) 11rem, 13rem"
+              />
+            </a>
+            <div className="flex flex-col items-center gap-1">
+              <div className="relative w-44 md:w-52">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 opacity-60 blur-lg transition-opacity group-hover:opacity-80" aria-hidden="true" />
+                <div className="relative rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 p-[1.5px]">
+                  <a
+                    href="https://forms.gle/ZNiUcuP8wZ935bfr6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group w-full inline-flex items-center justify-center rounded-full border border-white/20 bg-black/80 px-5 py-2 text-sm font-semibold tracking-wide text-white transition-all hover:scale-[1.02] hover:bg-black"
+                  >
+                    Claim your token!
+                  </a>
+                </div>
+              </div>
+              <span className="w-44 md:w-52 text-center text-[10px] uppercase tracking-[0.3em] text-white/70">
+                Join the waitlist
+              </span>
+            </div>
+          </div>
         </div>
 
       </section>
