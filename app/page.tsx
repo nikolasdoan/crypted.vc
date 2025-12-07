@@ -202,7 +202,7 @@ export default function CryptEDWebsite() {
           </div>
         </div>
 
-        {/* App Store badge + waitlist CTA overlayed on hero, centered lower-half */}
+        {/* App Store badge + Google Play + waitlist CTA overlayed on hero, centered lower-half */}
         <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex items-center justify-center bottom-[12vh] md:bottom-[14vh]">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             <a
@@ -214,6 +214,21 @@ export default function CryptEDWebsite() {
               <Image
                 src="/Download_App_Store_RGB.png"
                 alt="Download on the App Store"
+                width={200}
+                height={60}
+                className="w-44 md:w-52 h-auto rounded-none"
+                sizes="(max-width: 768px) 11rem, 13rem"
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=app.crypted.crypto&pcampaignid=web_share"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get it on Google Play"
+            >
+              <Image
+                src="/Google_Play_Store.png"
+                alt="Get it on Google Play"
                 width={200}
                 height={60}
                 className="w-44 md:w-52 h-auto rounded-none"
