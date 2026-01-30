@@ -203,8 +203,8 @@ export default function CryptEDWebsite() {
         </div>
 
         {/* App Store badge + Google Play + waitlist CTA overlayed on hero, centered lower-half */}
-        <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex items-center justify-center bottom-[12vh] md:bottom-[14vh]">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+        <div className="absolute left-1/2 -translate-x-1/2 z-[70] flex flex-col items-center justify-center bottom-[12vh] md:bottom-[14vh]">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-6">
             <a
               href="https://apps.apple.com/tw/app/crypted-blockchain-education/id6747925774?l=en-GB"
               target="_blank"
@@ -253,6 +253,38 @@ export default function CryptEDWebsite() {
                 Join the waitlist
               </span>
             </div>
+          </div>
+          
+          {/* Fortune and Risk buttons below the main CTAs */}
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <a
+              href="https://crypted.zeabur.app/fortune/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative w-44 md:w-52"
+              data-no-hero-toggle
+            >
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 opacity-60 blur-lg transition-opacity group-hover:opacity-80" aria-hidden="true" />
+              <div className="relative rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 p-[1.5px]">
+                <div className="w-full inline-flex items-center justify-center rounded-full border border-white/20 bg-black/80 px-5 py-2 text-sm font-semibold tracking-wide text-white transition-all hover:scale-[1.02] hover:bg-black">
+                  Fortune
+                </div>
+              </div>
+            </a>
+            <a
+              href="https://crypted.zeabur.app/risk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative w-44 md:w-52"
+              data-no-hero-toggle
+            >
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 opacity-60 blur-lg transition-opacity group-hover:opacity-80" aria-hidden="true" />
+              <div className="relative rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 p-[1.5px]">
+                <div className="w-full inline-flex items-center justify-center rounded-full border border-white/20 bg-black/80 px-5 py-2 text-sm font-semibold tracking-wide text-white transition-all hover:scale-[1.02] hover:bg-black">
+                  Risk
+                </div>
+              </div>
+            </a>
           </div>
         </div>
 
